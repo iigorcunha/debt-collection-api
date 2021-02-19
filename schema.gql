@@ -23,6 +23,7 @@ type Query {
 
 type Mutation {
   createUser(data: UserInput!): User!
+  login(password: String!, cpf: String!): User!
 }
 
 input UserInput {

@@ -16,13 +16,19 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async findOne(cpf: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: { cpf },
+    });
+  }
+
   async create({ name, email, cpf, password }: CreateUserDTO): Promise<User> {
     const hashedPassword = await hash(password, 10);
-    const hashedCPF = await hash(cpf, 10);
+    // const hashedCPF = await hash(cpf, 10);
     const user = this.userRepository.create({
       name,
       email,
-      cpf: hashedCPF,
+      cpf,
       password: hashedPassword,
     });
     await this.userRepository.save(user);
