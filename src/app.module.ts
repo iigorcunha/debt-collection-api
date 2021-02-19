@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
 import * as optionsOrm from './config/orm';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       autoSchemaFile: 'schema.gql',
       playground: true,
     }),
+    AuthModule,
   ],
   providers: [AppService],
 })

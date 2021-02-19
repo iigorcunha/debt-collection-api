@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { hash } from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { CreateUserDTO } from './create-user.dto';
 import { User } from './user.entity';
@@ -15,10 +16,16 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async create(createUserDTO: CreateUserDTO): Promise<User> {
-    const user = this.userRepository.create(createUserDTO);
+  async create({ name, email, cpf, password }: CreateUserDTO): Promise<User> {
+    const hashedPassword = await hash(password, 10);
+    const hashedCPF = await hash(cpf, 10);
+    const user = this.userRepository.create({
+      name,
+      email,
+      cpf: hashedCPF,
+      password: hashedPassword,
+    });
     await this.userRepository.save(user);
-    console.log('user', user);
     return user;
   }
 }
