@@ -9,7 +9,8 @@ const options: TypeOrmModuleOptions = {
   port: 5432,
   username: 'postgres',
   password: 'Ic@199265',
-  entities: [path.resolve(__dirname, '..', '**', '*.entity.*')],
+  keepConnectionAlive: true,
+  entities: [path.resolve(__dirname, '..', '**', '*.entity.{ts,js}')],
   migrations: [path.resolve(__dirname, '..', 'database', 'migrations', '*')],
 };
 
