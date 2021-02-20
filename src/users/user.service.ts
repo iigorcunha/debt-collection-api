@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcryptjs';
 import { Repository } from 'typeorm';
-import { CreateUserDTO } from './create-user.dto';
+import UserInput from './dto/user.input';
 import { User } from './user.entity';
 
 @Injectable()
@@ -16,13 +16,13 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async findOne(cpf: string): Promise<User> {
+  async findByCPF(cpf: string): Promise<User> {
     return this.userRepository.findOne({
       where: { cpf },
     });
   }
 
-  async create({ name, email, cpf, password }: CreateUserDTO): Promise<User> {
+  async create({ name, email, cpf, password }: UserInput): Promise<User> {
     const hashedPassword = await hash(password, 10);
     // const hashedCPF = await hash(cpf, 10);
     const user = this.userRepository.create({

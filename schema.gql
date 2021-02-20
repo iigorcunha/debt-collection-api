@@ -3,11 +3,10 @@
 # ------------------------------------------------------
 
 type User {
-  id: Float!
+  id: ID!
   name: String!
   email: String!
   cpf: String!
-  password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -17,13 +16,18 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type AuthType {
+  user: User!
+  token: String!
+}
+
 type Query {
   getUsers: [User!]!
 }
 
 type Mutation {
   createUser(data: UserInput!): User!
-  login(password: String!, cpf: String!): User!
+  login(password: String!, cpf: String!): AuthType!
 }
 
 input UserInput {

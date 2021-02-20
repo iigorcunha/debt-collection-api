@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { compare } from 'bcryptjs';
 import { UserService } from 'src/users/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/users/user.entity';
+import { AuthType } from './dto/auth.type';
 
 @Injectable()
 export class AuthService {
@@ -10,16 +12,24 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async auth(cpf: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(cpf);
-    if (user && compare(pass, user.password)) {
-      console.log(user);
-      const payload = { sub: user.id };
-      return {
-        access_token: this.jwtService.sign(payload),
-      };
+  async auth(cpf: string, password: string): Promise<AuthType> {
+    const user = await this.usersService.findByCPF(cpf);
+    const validPassword = compare(password, user.password);
+
+    if (!validPassword) {
+      throw new UnauthorizedException('Incorrect CPF/Password');
     }
 
-    return null;
+    const token = await this.jwtToken(user);
+
+    return {
+      user,
+      token,
+    };
+  }
+
+  private async jwtToken(user: User): Promise<string> {
+    const payload = { sub: user.id };
+    return this.jwtService.signAsync(payload);
   }
 }
