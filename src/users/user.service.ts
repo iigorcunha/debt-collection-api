@@ -16,6 +16,10 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async findByID(id: string): Promise<User> {
+    return this.userRepository.findOne(id);
+  }
+
   async findByCPF(cpf: string): Promise<User> {
     return this.userRepository.findOne({
       where: { cpf },

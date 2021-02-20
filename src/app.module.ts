@@ -6,6 +6,9 @@ import { UserModule } from './users/user.module';
 import * as optionsOrm from './config/orm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AuthModule } from './auth/auth.module';
+import { CompanyResolver } from './company/company.resolver';
+import { CompanyService } from './company/company.service';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -17,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
       context: ({ req }) => ({ req }),
     }),
     AuthModule,
+    CompanyModule,
   ],
   providers: [AppService],
 })
