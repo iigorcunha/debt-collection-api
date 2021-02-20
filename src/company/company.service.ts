@@ -11,6 +11,10 @@ export class CompanyService {
     private companyRepository: Repository<Company>,
   ) {}
 
+  async listAll(): Promise<Company[]> {
+    return this.companyRepository.find();
+  }
+
   async create(data: CompanyInput): Promise<Company> {
     const company = this.companyRepository.create(data);
     await this.companyRepository.save(company);

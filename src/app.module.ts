@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { CompanyResolver } from './company/company.resolver';
 import { CompanyService } from './company/company.service';
 import { CompanyModule } from './company/company.module';
+import { DebtorModule } from './debtor/debtor.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CompanyModule } from './company/company.module';
     }),
     AuthModule,
     CompanyModule,
+    DebtorModule,
   ],
   providers: [AppService],
 })

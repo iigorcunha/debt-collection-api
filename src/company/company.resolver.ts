@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/auth.guard';
 import { Company } from './company.entity';
 import { CompanyService } from './company.service';
@@ -17,5 +17,13 @@ export class CompanyResolver {
     const company = await this.companyService.create(input);
 
     return company;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Query(() => [Company])
+  public async listAllCompanies(): Promise<Company[]> {
+    const listCompanies = await this.companyService.listAll();
+
+    return listCompanies;
   }
 }
