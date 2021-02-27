@@ -31,6 +31,34 @@ export class User {
   password: string;
 
   @Field()
+  @Column()
+  address: string;
+
+  @Field()
+  @Column({ name: 'postal_code' })
+  postalCode: string;
+
+  @Field()
+  @Column()
+  number: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  complement: string;
+
+  @Field()
+  @Column()
+  neighborhood: string;
+
+  @Field()
+  @Column()
+  city: string;
+
+  @Field()
+  @Column()
+  state: string;
+
+  @Field()
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

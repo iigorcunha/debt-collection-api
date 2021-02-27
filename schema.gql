@@ -7,6 +7,13 @@ type User {
   name: String!
   email: String!
   cpf: String!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String
+  neighborhood: String!
+  city: String!
+  state: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -21,13 +28,68 @@ type AuthType {
   token: String!
 }
 
+type Company {
+  id: ID!
+  name: String!
+  code: String!
+  cnpj: String!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String!
+  neighborhood: String!
+  city: String!
+  state: String!
+  phone: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Debtor {
+  id: ID!
+  name: String!
+  code: String!
+  cnpjCpf: String!
+  rgIe: String!
+  isPerson: Boolean!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String!
+  neighborhood: String!
+  city: String!
+  state: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type DebtPaper {
+  id: ID!
+  code: String!
+  quota: Float!
+  balance: Float!
+  debtValue: Float!
+  paymentValue: Float!
+  payday: DateTime!
+  company: Company!
+  debtor: Debtor!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getUsers: [User!]!
+  listAllCompanies: [DebtPaper!]!
+  listAllDebtor: [Debtor!]!
 }
 
 type Mutation {
   createUser(data: UserInput!): User!
   login(password: String!, cpf: String!): AuthType!
+  createCompany(data: CompanyInput!): Company!
+  createDebtor(data: DebtorInput!): Debtor!
+  createDebtPaper(data: DebtPaperInput!): DebtPaper!
 }
 
 input UserInput {
@@ -35,4 +97,52 @@ input UserInput {
   email: String!
   cpf: String!
   password: String!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String
+  neighborhood: String!
+  city: String!
+  state: String!
+}
+
+input CompanyInput {
+  name: String!
+  code: String!
+  cnpj: String!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String
+  neighborhood: String!
+  city: String!
+  state: String!
+  phone: String
+  email: String
+}
+
+input DebtorInput {
+  name: String!
+  code: String!
+  cnpjCpf: String!
+  rgIe: String!
+  isPerson: Boolean!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String
+  neighborhood: String!
+  city: String!
+  state: String!
+}
+
+input DebtPaperInput {
+  code: String!
+  quota: Float!
+  balance: Float!
+  debtValue: Float!
+  paymentValue: Float!
+  payday: DateTime
+  companyCode: String
+  debtorCode: String!
 }

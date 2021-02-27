@@ -12,7 +12,9 @@ export class DebtorService {
   ) {}
 
   public async listAllDebtor(): Promise<Debtor[]> {
-    return this.debtorRepository.find();
+    return this.debtorRepository.find({
+      relations: ['address'],
+    });
   }
 
   public async createDebtor(input: DebtorInput): Promise<Debtor> {

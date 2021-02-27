@@ -28,6 +28,16 @@ export class CreateCompany1613830105524 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: 'phone',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'email',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'address',
             type: 'varchar',
           },
@@ -55,16 +65,6 @@ export class CreateCompany1613830105524 implements MigrationInterface {
           {
             name: 'state',
             type: 'varchar',
-          },
-          {
-            name: 'phone',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            isNullable: true,
           },
           {
             name: 'created_at',

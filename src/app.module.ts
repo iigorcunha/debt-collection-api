@@ -10,6 +10,7 @@ import { CompanyResolver } from './company/company.resolver';
 import { CompanyService } from './company/company.service';
 import { CompanyModule } from './company/company.module';
 import { DebtorModule } from './debtor/debtor.module';
+import { DebtPapersModule } from './debt-papers/debt-papers.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { DebtorModule } from './debtor/debtor.module';
     AuthModule,
     CompanyModule,
     DebtorModule,
+    DebtPapersModule,
   ],
   providers: [AppService],
 })

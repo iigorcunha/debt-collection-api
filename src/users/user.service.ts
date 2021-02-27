@@ -26,15 +26,11 @@ export class UserService {
     });
   }
 
-  async create({ name, email, cpf, password }: UserInput): Promise<User> {
+  async create({ password, ...userData }: UserInput): Promise<User> {
     const hashedPassword = await hash(password, 10);
     // const hashedCPF = await hash(cpf, 10);
-    const user = this.userRepository.create({
-      name,
-      email,
-      cpf,
-      password: hashedPassword,
-    });
+    const user = this.userRepository.create(userData);
+    user.password = hashedPassword;
     await this.userRepository.save(user);
     return user;
   }

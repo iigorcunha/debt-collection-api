@@ -32,6 +32,35 @@ export class CreateUsers1613768658485 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'address',
+            type: 'varchar',
+          },
+          {
+            name: 'postal_code',
+            type: 'varchar',
+          },
+          {
+            name: 'number',
+            type: 'varchar',
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'neighborhood',
+            type: 'varchar',
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'state',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
