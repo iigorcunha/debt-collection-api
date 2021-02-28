@@ -1,6 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { Company } from 'src/company/company.entity';
-import { Debtor } from 'src/debtor/debtor.entity';
 
 @InputType()
 export default class DebtPaperInput {
@@ -23,8 +22,8 @@ export default class DebtPaperInput {
   payday: Date;
 
   @Field({ nullable: true })
-  companyCode: string;
+  companyId: string;
 
-  @Field()
-  debtorCode: string;
+  @Field({ nullable: true })
+  debtorId: string;
 }

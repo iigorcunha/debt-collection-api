@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GqlAuthGuard } from 'src/auth/auth.guard';
+import { GqlAuthGuard } from '../auth/auth.guard';
 import { DebtPaper } from './debt-papers.entity';
 import { DebtPapersService } from './debt-papers.service';
 import DebtPaperInput from './dto/debt-paper.input';
@@ -21,7 +21,7 @@ export class DebtPapersResolver {
 
   @UseGuards(GqlAuthGuard)
   @Query(() => [DebtPaper])
-  public async listAllCompanies(): Promise<DebtPaper[]> {
+  public async listAllDebtPapers(): Promise<DebtPaper[]> {
     const listCompanies = await this.debtPapersService.listAll();
 
     return listCompanies;

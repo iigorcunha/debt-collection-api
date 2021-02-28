@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { GqlAuthGuard } from 'src/auth/auth.guard';
+import { GqlAuthGuard } from '../auth/auth.guard';
 import { Debtor } from './debtor.entity';
 import { DebtorService } from './debtor.service';
 import DebtorInput from './dto/debtor.input';

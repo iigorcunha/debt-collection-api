@@ -6,14 +6,15 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   JoinColumn,
+  BaseEntity,
 } from 'typeorm';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Company } from 'src/company/company.entity';
-import { Debtor } from 'src/debtor/debtor.entity';
+import { Company } from '../company/company.entity';
+import { Debtor } from '../debtor/debtor.entity';
 
-@ObjectType()
 @Entity({ name: 'debt_papers' })
-export class DebtPaper {
+@ObjectType()
+export class DebtPaper extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
   id: string;
@@ -38,24 +39,22 @@ export class DebtPaper {
   @Column({ name: 'payment_value' })
   paymentValue: number;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   payday: Date;
 
-  @Column({ nullable: true })
-  company_id: string;
+  @Column({ nullable: true, name: 'company_id' })
+  companyId: string;
 
   @JoinColumn({ name: 'company_id' })
   @ManyToOne(() => Company)
-  @Field()
   company: Company;
 
-  @Column({ nullable: true })
-  debtor_id: string;
+  @Column({ nullable: true, name: 'debtor_id' })
+  debtorId: string;
 
   @JoinColumn({ name: 'debtor_id' })
   @ManyToOne(() => Debtor)
-  @Field()
   debtor: Debtor;
 
   @Field()

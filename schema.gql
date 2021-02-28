@@ -28,24 +28,6 @@ type AuthType {
   token: String!
 }
 
-type Company {
-  id: ID!
-  name: String!
-  code: String!
-  cnpj: String!
-  address: String!
-  postalCode: String!
-  number: String!
-  complement: String!
-  neighborhood: String!
-  city: String!
-  state: String!
-  phone: String!
-  email: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 type Debtor {
   id: ID!
   name: String!
@@ -71,17 +53,36 @@ type DebtPaper {
   balance: Float!
   debtValue: Float!
   paymentValue: Float!
-  payday: DateTime!
-  company: Company!
-  debtor: Debtor!
+  payday: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  code: String!
+  cnpj: String!
+  address: String!
+  postalCode: String!
+  number: String!
+  complement: String!
+  neighborhood: String!
+  city: String!
+  state: String!
+  phone: String!
+  email: String!
+  debtPapers: [DebtPaper!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
 
 type Query {
   getUsers: [User!]!
-  listAllCompanies: [DebtPaper!]!
+  listAllCompanies: [Company!]!
+  listByCompanyWithDebtPapers(id: String!): Company!
   listAllDebtor: [Debtor!]!
+  listAllDebtPapers: [DebtPaper!]!
 }
 
 type Mutation {
@@ -143,6 +144,6 @@ input DebtPaperInput {
   debtValue: Float!
   paymentValue: Float!
   payday: DateTime
-  companyCode: String
-  debtorCode: String!
+  companyId: String
+  debtorId: String
 }

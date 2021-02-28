@@ -21,4 +21,12 @@ export class CompanyService {
 
     return company;
   }
+
+  async listByCompanyWithDebtPapers(id: string): Promise<Company> {
+    const company = await this.companyRepository.findOne(id, {
+      relations: ['debtPapers'],
+    });
+
+    return company;
+  }
 }

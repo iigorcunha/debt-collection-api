@@ -3,7 +3,7 @@ import { User } from './user.entity';
 import UserInput from './dto/user.input';
 import { UserService } from './user.service';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/auth/auth.guard';
+import { GqlAuthGuard } from '../auth/auth.guard';
 
 @Resolver(() => User)
 export default class UserResolver {

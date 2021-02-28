@@ -12,7 +12,9 @@ export class DebtPapersService {
   ) {}
 
   async listAll(): Promise<DebtPaper[]> {
-    return this.debtPaperRepository.find();
+    return this.debtPaperRepository.find({
+      relations: ['debtor', 'company'],
+    });
   }
 
   async create(data: DebtPaperInput): Promise<DebtPaper> {
