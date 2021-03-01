@@ -42,6 +42,7 @@ type Debtor {
   neighborhood: String!
   city: String!
   state: String!
+  company: Company!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -73,6 +74,7 @@ type Company {
   phone: String!
   email: String!
   debtPapers: [DebtPaper!]!
+  debtor: [Debtor!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

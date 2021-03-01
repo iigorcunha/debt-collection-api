@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { DebtPaper } from 'src/debt-papers/debt-papers.entity';
+import { Debtor } from 'src/debtor/debtor.entity';
 import {
   Entity,
   Column,
@@ -68,6 +69,10 @@ export class Company {
   @OneToMany(() => DebtPaper, (debtPaper) => debtPaper.company)
   @Field(() => [DebtPaper])
   debtPapers: Promise<DebtPaper[]>;
+
+  @OneToMany(() => Debtor, (debtor) => debtor.company)
+  @Field(() => [Debtor])
+  debtor: Promise<Debtor[]>;
 
   @Field()
   @CreateDateColumn({ name: 'created_at' })

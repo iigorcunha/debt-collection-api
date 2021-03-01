@@ -11,7 +11,12 @@ const options: TypeOrmModuleOptions = {
   password: 'Ic@199265',
   keepConnectionAlive: true,
   entities: [path.resolve(__dirname, '..', '**', '*.entity.{ts,js}')],
-  migrations: [path.resolve(__dirname, '..', 'database', 'migrations', '*')],
+  migrations: [
+    path.resolve(__dirname, '..', 'database', 'migrations', '*.{ts,js}'),
+  ],
+  cli: {
+    migrationsDir: path.resolve(__dirname, '..', 'database', 'migrations'),
+  },
 };
 
 module.exports = options;

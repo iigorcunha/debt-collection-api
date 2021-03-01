@@ -1,10 +1,12 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { Company } from 'src/company/company.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @ObjectType()
@@ -61,6 +63,13 @@ export class Debtor {
   @Field()
   @Column()
   state: string;
+
+  @Column({ nullable: true, name: 'company_id' })
+  companyId: string;
+
+  @ManyToOne(() => Company, (company) => company.debtor)
+  @Field(() => Company)
+  company: Promise<Company>;
 
   @Field()
   @CreateDateColumn({ name: 'created_at' })
